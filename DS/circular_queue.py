@@ -6,8 +6,18 @@ class CircularQueue:
         self.cur_size = 0
         self.max_size = max_size
 
-    def enqueue(self, data):
+    def is_full(self):
         if self.cur_size == self.max_size - 1:
+            return True
+        return False
+
+    def is_empty(self):
+        if self.cur_size == 0:
+            return True
+        return False
+
+    def enqueue(self, data):
+        if self.is_full():
             print("Queue is full!")
             return False
         self.queue[self.tail] = data
@@ -16,7 +26,7 @@ class CircularQueue:
         return True
 
     def dequeue(self):
-        if self.cur_size == 0:
+        if self.is_empty():
             print("Queue is empty!")
             return None
         data = self.queue[self.head]
@@ -31,12 +41,16 @@ if __name__ == "__main__":
     c_queue = CircularQueue(max_size)
     print(c_queue.queue)
 
+    print("deqeue")
+    dequeued_data = c_queue.dequeue()
+    print(c_queue.queue)
+
     print("enqeue")
     for i in range(1, max_size + 5):
         if c_queue.enqueue(i):
             print(c_queue.queue)
 
-    print("deqeue")
+    print("deqeue again")
     for i in range(3):
         dequeued_data = c_queue.dequeue()
         print(c_queue.queue)
