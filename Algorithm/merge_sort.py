@@ -31,5 +31,7 @@ def merge(below, above):
     return result
 
 if __name__ == "__main__":
-    sorted_data = merge_sort([10,9,8,7,6,5,4,3,2,1])
+    data = [10,9,18,7,62,5,14,3,2,1]
+    sorted_data = merge_sort(data)
+    print(data)
     print(sorted_data)
