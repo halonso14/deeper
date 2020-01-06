@@ -111,16 +111,8 @@ class Game(NumberRule):
 
 
 if __name__ == "__main__":
-    rule = NumberRule(5, 10)
-    print(rule)
-    number = BaseballNumber(game_digits=rule.game_digits)
-
-    # print(number)
-    player = Player()
-    print(player)
-
-
     game = Game()
+
     game.add_player(game.player_list)
     game.add_player(game.player_list)
     game.add_player(game.player_list)
