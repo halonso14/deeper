@@ -64,6 +64,9 @@ class Player(NumberRule):
         self.stamina = stamina
         self.player_numbers = None
 
+    def __repr__(self):
+        return "PLAYER STATUS\n{} with {} stamina left\n".format(self.out_count, self.stamina)
+
     def player_at_bat(self, player_numbers):
         self.out_count["BALL"] = 0
         self.out_count["STRIKE"] = 0
@@ -73,12 +76,13 @@ class Player(NumberRule):
             print("Play random")
             self.player_numbers = BaseballNumber(game_digits=self.game_digits, game_range=self.game_range)
 
-    def __repr__(self):
-        return "PLAYER STATUS\n{} with {} stamina left\n".format(self.out_count, self.stamina)
-
 
 class Game(NumberRule):
-    def __init__(self, game_digits=DEFAULT_DIGITS, game_range=DEFAULT_RANGE, player_numbers=DEFAULT_PLAYERS, innings=DEFAULT_INNINGS):
+    def __init__(self,
+                 game_digits=DEFAULT_DIGITS,
+                 game_range=DEFAULT_RANGE,
+                 player_numbers=DEFAULT_PLAYERS,
+                 innings=DEFAULT_INNINGS):
         super().__init__(game_digits, game_range)
         self.pitcher = BaseballNumber(game_digits=self.game_digits, game_range=self.game_range)
 
@@ -98,6 +102,13 @@ class Game(NumberRule):
         return player_list[player_id]
 
     @classmethod
+    def remove_player(cls, player_list, player_id):
+        if player_id not in player_list:
+            return player_list
+        del player_list[player_id]
+        return player_list
+
+    @classmethod
     def player_swing(cls, pitcher, player):
         tmp_player_numbers = player.player_numbers
         for player_num_pos, player_num in enumerate(tmp_player_numbers):
@@ -112,6 +123,19 @@ class Game(NumberRule):
         player.stamina -= 1
         return player
 
+    @classmethod
+    def is_game_on(cls, player):
+        if player.stamina == ZERO:
+            print("LOSE, no stamina")
+            return False
+        if player.out_count["OUT"] == MAX_OUT_COUNT:
+            print("LOSE, strike out")
+            return False
+        if player.out_count["STRIKE"] == DEFAULT_DIGITS:
+            print("WIN, home run")
+            return False
+        return True
+
     def validate_number(self, tmp_numbers, new_number):
         if new_number < 0 or new_number > self.game_range:
             print("number is out of range")
@@ -123,18 +147,6 @@ class Game(NumberRule):
                 return False, tmp_numbers
         tmp_numbers.append(new_number)
         return True, tmp_numbers
-
-    def is_game_on(self, player):
-        if player.stamina == ZERO:
-            print("LOSE, no stamina")
-            return False
-        if player.out_count["OUT"] == MAX_OUT_COUNT:
-            print("LOSE, strike out")
-            return False
-        if player.out_count["STRIKE"] == DEFAULT_DIGITS:
-            print("WIN, home run")
-            return False
-        return True
 
 
 if __name__ == "__main__":
@@ -189,6 +201,6 @@ if __name__ == "__main__":
                     print(player)
                     print(pitcher)
 
-                    INNING_RESULT = game.is_game_on(player)
+                    INNING_RESULT = Game.is_game_on(player)
         print("inning ended")
         GAME_ON = False
