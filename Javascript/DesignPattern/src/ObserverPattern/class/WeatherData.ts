@@ -9,52 +9,20 @@ class WeatherData implements Subject {
     private _pressure: number = DEFAULT_PRESSURE;
 
     constructor() {
-        this.observers = new Array();
+        this._observers = new Array();
     }
 
-    get observers(): Array<Observer> {
-        return this._observers;
-    };
-
-    set observers(observers: Array<Observer>) {
-        this._observers = observers;
-    };
-
-    get temperature(): number {
-        return this._temperature;
-    };
-
-    set temperature(temperature: number) {
-        this._temperature = temperature;
-    };
-    
-    get humidity(): number {
-        return this._humidity;
-    };
-
-    set humidity(humidity: number) {
-        this._humidity = humidity;
-    };
-
-    get pressure(): number {
-        return this._pressure;
-    };
-
-    set pressure(pressure: number) {
-        this._pressure = pressure;
-    };
-
     public registerObserver(observer: Observer) {
-        this.observers.push(observer);
+        this._observers.push(observer);
     };
 
     public removeObserver(observer: Observer) {
-        this.observers.filter((currentObserver: Observer) => currentObserver != observer);
+        this._observers.filter((currentObserver: Observer) => currentObserver != observer);
     };
 
     public notifyObserver() {
-        this.observers.forEach((currentObserver: Observer) => {
-            currentObserver.update(this.temperature, this.humidity, this.pressure);
+        this._observers.forEach((currentObserver: Observer) => {
+            currentObserver.update(this._temperature, this._humidity, this._pressure);
         });
 
     };
@@ -64,9 +32,9 @@ class WeatherData implements Subject {
     };
 
     public setMeasurements(temperature: number, humidity: number, pressure: number):void {
-        this.temperature = temperature;
-        this.humidity = humidity;
-        this.pressure = pressure;
+        this._temperature = temperature;
+        this._humidity = humidity;
+        this._pressure = pressure;
         this.measurementsChanged();
     }
 
