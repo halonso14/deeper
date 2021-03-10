@@ -1,7 +1,7 @@
 {
   "name": "designpattern",
   "version": "1.0.0",
-  "description": "",
+  "description": "from Head First Design Patter",
   "main": "index.ts",
   "scripts": {
     "build": "tsc",
