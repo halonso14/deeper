@@ -3,41 +3,42 @@ import Subject from '../interface/Subject';
 import { DEFAULT_HUMIDITY, DEFAULT_PRESSURE, DEFAULT_TEMPERATURE } from '../types';
 
 class WeatherData implements Subject {
-    private _observers: Array<Observer> = [];
-    private _temperature: number = DEFAULT_TEMPERATURE;
-    private _humidity: number = DEFAULT_HUMIDITY;
-    private _pressure: number = DEFAULT_PRESSURE;
+	private _observers: Array<Observer> = [];
 
-    constructor() {
-        this._observers = new Array();
-    }
+	private _temperature: number = DEFAULT_TEMPERATURE;
 
-    public registerObserver(observer: Observer) {
-        this._observers.push(observer);
-    };
+	private _humidity: number = DEFAULT_HUMIDITY;
 
-    public removeObserver(observer: Observer) {
-        this._observers.filter((currentObserver: Observer) => currentObserver != observer);
-    };
+	private _pressure: number = DEFAULT_PRESSURE;
 
-    public notifyObserver() {
-        this._observers.forEach((currentObserver: Observer) => {
-            currentObserver.update(this._temperature, this._humidity, this._pressure);
-        });
+	constructor() {
+		this._observers = [];
+	}
 
-    };
+	public registerObserver(observer: Observer) {
+		this._observers.push(observer);
+	}
 
-    public measurementsChanged() {
-        this.notifyObserver();
-    };
+	public removeObserver(observer: Observer) {
+		this._observers.filter((currentObserver: Observer) => currentObserver != observer);
+	}
 
-    public setMeasurements(temperature: number, humidity: number, pressure: number):void {
-        this._temperature = temperature;
-        this._humidity = humidity;
-        this._pressure = pressure;
-        this.measurementsChanged();
-    }
+	public notifyObserver() {
+		this._observers.forEach((currentObserver: Observer) => {
+			currentObserver.update(this._temperature, this._humidity, this._pressure);
+		});
+	}
 
-};
+	public measurementsChanged() {
+		this.notifyObserver();
+	}
+
+	public setMeasurements(temperature: number, humidity: number, pressure: number): void {
+		this._temperature = temperature;
+		this._humidity = humidity;
+		this._pressure = pressure;
+		this.measurementsChanged();
+	}
+}
 
 export default WeatherData;
