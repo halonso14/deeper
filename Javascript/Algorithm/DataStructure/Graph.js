@@ -3,13 +3,13 @@
 
 export class Graph {
   constructor() {
-      this.adjacencyList = {};
+    this.adjacencyList = {};
   }
 
   addVertex(vertex) {
-      if (!this.adjacencyList[vertex]) {
-        this.adjacencyList[vertex] = [];
-      }
+    if (!this.adjacencyList[vertex]) {
+      this.adjacencyList[vertex] = [];
+    }
   }
 
   addEdge(source, destination) {
@@ -24,15 +24,19 @@ export class Graph {
   }
 
   removeEdge(source, destination) {
-    this.adjacencyList[source] = this.adjacencyList[source].filter(vertex => vertex !== destination);
-    this.adjacencyList[destination] = this.adjacencyList[destination].filter(vertex => vertex !== source);
+    this.adjacencyList[source] = this.adjacencyList[source].filter(
+      (vertex) => vertex !== destination
+    );
+    this.adjacencyList[destination] = this.adjacencyList[destination].filter(
+      (vertex) => vertex !== source
+    );
   }
-  
+
   removeVertex(vertex) {
     while (this.adjacencyList[vertex]) {
       const adjacentVertex = this.adjacencyList[vertex].pop();
       this.removeEdge(vertex, adjacentVertex);
     }
     delete this.adjacencyList[vertex];
-  } 
+  }
 }
