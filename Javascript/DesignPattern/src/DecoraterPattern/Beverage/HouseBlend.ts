@@ -5,4 +5,8 @@ class HouseBlend extends Beverage {
     super();
     this.description = 'House Blend';
   }
+
+  cost(): number {
+    return 1.99;
+  }
 }
