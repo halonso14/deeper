@@ -1,31 +1,61 @@
 // try-catch is implicitly applied.
-const promiseHandler: Promise<void> = new Promise((resolve, reject) => {
-    let second: number = (Math.random() * 4 );
-    // do something asynchronus.
-    setTimeout(() => {
-        console.log('second', second);
-        if (second > 2) {
-            resolve(second);
-        } else if (second > 1) {
-            // reject goes to catch.
-            reject(`Not true`);
-        } else {
-            // reject's parameter could be any Object.
-            reject(new Error(`Error`));
-        }
-        return;
-    }, second * 1000, true);
-}).then((response: any) => {
-    console.log('first then')
-    console.log(response + "s");
-    if (response > 3) {
-        return response;
+const promiseErrorHandling = new Promise((resolve, reject) => {
+  console.log('Promise - Error handling.');
+  let second = Math.random() * 4;
+  // do something asynchronus.
+  setTimeout(
+    () => {
+      console.log('second', second);
+      if (second > 2) {
+        // resolve's parameter could be any Object.
+        resolve(second);
+      } else if (second > 1) {
+        // reject goes to catch.
+        reject(`reject`);
+      } else {
+        // reject's parameter could be any Object but Error type is recommended.
+        reject(new Error(`Error`));
+      }
+      reject(new Error('This reject will be ignored.'));
+      return;
+    },
+    1000,
+    true
+  );
+})
+  // onFirstRejectd will be skipped.
+  .then((onFirstFulfilled: any) => {
+    console.log('On first Fulfilled.');
+    console.log(onFirstFulfilled + 's');
+    if (onFirstFulfilled > 3) {
+      return onFirstFulfilled;
     }
     // throw goes to catch.
-    throw Error('Error from first then')
-}).then(response => {
-    console.log('second then')
-    console.log(response);
-}).catch((error) => {
+    throw Error('Error from first Fulfilled.');
+  })
+  .then(
+    (onSecondFulfilled) => {
+      console.log('On second Fulfilled.');
+      console.log(onSecondFulfilled);
+    },
+    (onSecondRejected) => {
+      console.log('On second Rejected.');
+      console.log(`"${onSecondRejected}" is passed to second then`);
+      throw Error('Error from second Rejected.');
+    }
+  )
+  .then(
+    (onThirdFulfilled) => {
+      console.log('On third Fulfilled.');
+      console.log(onThirdFulfilled);
+    },
+    (onThirdRejected) => {
+      console.log('On third Rejected.');
+      console.log(onThirdRejected);
+      console.log(`"${onThirdRejected}" is passed to third then`);
+      throw Error('Error from third Rejected.');
+    }
+  )
+  .catch((error) => {
     console.log('catch', error);
-});
+  });
