@@ -49,6 +49,14 @@ class ExampleClass {
     return this.protectedMemeber;
   }
 
+  public get member(): any {
+    return {
+      publicMemeber: this.publicMember,
+      privateMemeber: this.privateMemeber,
+      protectedMemeber: this.protectedMemeber,
+    };
+  }
+
   callMember(): void {
     console.log('callMember() is called');
     console.log('this.publicMember', this.publicMember);
@@ -174,6 +182,8 @@ console.log(exampleInstance.getProtectedMemeberByPublicMethod());
 // console.log(exampleInstance.getProtectedMemeberByProtectedMethod());
 console.log('*** conclusion: any members can be called by public method ***');
 console.log('exampleInstance end\n');
+console.log('call member with getter method', exampleInstance.member);
+console.log('call member with getter method', exampleInstance.callMember());
 
 const extendedExampleInstance = new ExtendedExampleClass(
   'public2',
