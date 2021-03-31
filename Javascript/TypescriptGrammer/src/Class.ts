@@ -58,17 +58,18 @@ class ExampleClass {
   }
 
   callMember(): void {
-    console.log('callMember() is called');
+    console.group('callMember() is called');
     console.log('this.publicMember', this.publicMember);
     console.log('this.privateMemeber', this.privateMemeber);
     console.log('this.protectedMemeber', this.protectedMemeber);
     console.log(
       '*** conclusion: protected members can be called within instance ***'
     );
+    console.groupEnd();
   }
 
   test(): void {
-    console.log('test() is called');
+    console.group('test() is called');
     console.log(
       'public method:',
       this.getPublicMemeberByPublicMethod(),
@@ -90,6 +91,7 @@ class ExampleClass {
     console.log(
       '*** conclusion: protected members can be called by any methods within instance ***'
     );
+    console.groupEnd();
   }
 }
 
@@ -103,17 +105,18 @@ class ExtendedExampleClass extends ExampleClass {
   }
 
   callSuperMember(): void {
-    console.log('callSuperMember() is called');
+    console.group('callSuperMember() is called');
     // console.log('super.publicMember', super.publicMember);
     // console.log('super.privateMemeber', super.privateMemeber);
     // console.log('super.protectedMemeber', super.protectedMemeber);
     console.log(
       '*** conclusion: members from super can be called only by methods ***'
     );
+    console.groupEnd();
   }
 
   testSuper(): void {
-    console.log('testSuper() is called');
+    console.group('testSuper() is called');
     console.log(
       'public method:',
       super.getPublicMemeberByPublicMethod(),
@@ -132,6 +135,7 @@ class ExtendedExampleClass extends ExampleClass {
     console.log(
       '*** conclusion: any members from super can be called by public/protected methods ***'
     );
+    console.groupEnd();
   }
 }
 
@@ -141,7 +145,7 @@ class OverridenExampleClass extends ExampleClass {
   }
 
   testSuper(): void {
-    console.log('testSuper() is called');
+    console.group('testSuper() is called');
     console.log('super');
     console.log(
       'public method:',
@@ -161,73 +165,119 @@ class OverridenExampleClass extends ExampleClass {
     console.log(
       '*** duplicated conclusion: any members from super can be called by public/protected methods ***'
     );
+    console.groupEnd();
   }
 }
 
+console.group('exampleInstance');
 const exampleInstance = new ExampleClass('public1', 'private1', 'protected1');
-console.log('exampleInstance');
 console.log(exampleInstance);
 exampleInstance.test();
-console.log('call publicMemeber by instance');
-console.log(exampleInstance.getPublicMemeberByPublicMethod());
+console.group('call memeber by instance');
+console.log(
+  'call publicMemeber by instance:',
+  exampleInstance.getPublicMemeberByPublicMethod()
+);
+console.log('public memeber can not be called by private method');
 // console.log(exampleInstance.getPublicMemeberByPrivateMethod());
+console.log('public memeber can not be called by protected method');
 // console.log(exampleInstance.getPublicMemeberByProtectedMethod());
-console.log('call privateMemeber by instance');
-console.log(exampleInstance.getPrivateMemeberByPublicMethod());
+console.log(
+  'call privateMemeber by instance:',
+  exampleInstance.getPrivateMemeberByPublicMethod()
+);
+console.log('private memeber can not be called by private method');
 // console.log(exampleInstance.getPrivateMemeberByPrivateMethod());
+console.log('private memeber can not be called by protected method');
 // console.log(exampleInstance.getPrivateMemeberByProtectedMethod());
-console.log('call protectedMemeber by instance');
-console.log(exampleInstance.getProtectedMemeberByPublicMethod());
+console.log(
+  'call protectedMemeber by instance:',
+  exampleInstance.getProtectedMemeberByPublicMethod()
+);
+console.log('protected memeber can not be called by private method');
 // console.log(exampleInstance.getProtectedMemeberByPrivateMethod());
+console.log('protected memeber can not be called by protected method');
 // console.log(exampleInstance.getProtectedMemeberByProtectedMethod());
+console.groupEnd();
 console.log('*** conclusion: any members can be called by public method ***');
 console.log('exampleInstance end\n');
 console.log('call member with getter method', exampleInstance.member);
 console.log('call member with getter method', exampleInstance.callMember());
+console.groupEnd();
 
 const extendedExampleInstance = new ExtendedExampleClass(
   'public2',
   'private2',
   'protected2'
 );
-console.log('extendedExampleInstance');
+
+console.group('extendedExampleInstance');
 console.log(extendedExampleInstance);
 extendedExampleInstance.test();
 extendedExampleInstance.testSuper();
-console.log('call publicMemeber by instance');
-console.log(extendedExampleInstance.getPublicMemeberByPublicMethod());
+console.group('call memeber by instance');
+console.log(
+  'call publicMemeber by instance:',
+  extendedExampleInstance.getPublicMemeberByPublicMethod()
+);
+console.log('public memeber can not be called by private method');
 // console.log(extendedExampleInstance.getPublicMemeberByPrivateMethod());
+console.log('public memeber can not be called by protected method');
 // console.log(extendedExampleInstance.getPublicMemeberByProtectedMethod());
-console.log('call privateMemeber by instance');
-console.log(extendedExampleInstance.getPrivateMemeberByPublicMethod());
+console.log(
+  'call privateMemeber by instance:',
+  extendedExampleInstance.getPrivateMemeberByPublicMethod()
+);
+console.log('private memeber can not be called by private method');
 // console.log(extendedExampleInstance.getPrivateMemeberByPrivateMethod());
+console.log('private memeber can not be called by protected method');
 // console.log(extendedExampleInstance.getPrivateMemeberByProtectedMethod());
-console.log('call protectedMemeber by instance');
-console.log(extendedExampleInstance.getProtectedMemeberByPublicMethod());
+console.log(
+  'call protectedMemeber by instance:',
+  extendedExampleInstance.getProtectedMemeberByPublicMethod()
+);
+console.groupEnd();
+console.log('protected memeber can not be called by private method');
 // console.log(extendedExampleInstance.getProtectedMemeberByPrivateMethod());
+console.log('protected memeber can not be called by protected method');
 // console.log(extendedExampleInstance.getProtectedMemeberByProtectedMethod());
 console.log('*** conclusion: any members can be called by public method ***');
 console.log('extendedExampleInstance end\n');
+console.groupEnd();
 
 const overridenExampleInstance = new OverridenExampleClass(
   'public2',
   'protected2'
 );
-console.log('overridenExampleInstance');
+console.group('overridenExampleInstance');
 console.log(overridenExampleInstance);
 overridenExampleInstance.test();
 overridenExampleInstance.testSuper();
-console.log('call publicMemeber by instance');
-console.log(overridenExampleInstance.getPublicMemeberByPublicMethod());
+console.group('call memeber by instance');
+console.log(
+  'call publicMemeber by instance:',
+  overridenExampleInstance.getPublicMemeberByPublicMethod()
+);
+console.log('public memeber can not be called by private method');
 // console.log(overridenExampleInstance.getPublicMemeberByPrivateMethod());
+console.log('public memeber can not be called by protected method');
 // console.log(overridenExampleInstance.getPublicMemeberByProtectedMethod());
-console.log('call privateMemeber by instance');
-console.log(overridenExampleInstance.getPrivateMemeberByPublicMethod());
+console.log(
+  'call privateMemeber by instance:',
+  overridenExampleInstance.getPrivateMemeberByPublicMethod()
+);
+console.log('private memeber can not be called by private method');
 // console.log(overridenExampleInstance.getPrivateMemeberByPrivateMethod());
+console.log('private memeber can not be called by protected method');
 // console.log(overridenExampleInstance.getPrivateMemeberByProtectedMethod());
-console.log('call protectedMemeber by instance');
-console.log(overridenExampleInstance.getProtectedMemeberByPublicMethod());
+console.log(
+  'call protectedMemeber by instance:',
+  overridenExampleInstance.getProtectedMemeberByPublicMethod()
+);
+console.log('protected memeber can not be called by private method');
 // console.log(overridenExampleInstance.getProtectedMemeberByPrivateMethod());
+console.log('protected memeber can not be called by protected method');
 // console.log(overridenExampleInstance.getProtectedMemeberByProtectedMethod());
 console.log('*** conclusion: any members can be called by public method ***');
 console.log('overridenExampleInstance end');
+console.groupEnd();
