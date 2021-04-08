@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start-mergeSort": "node ./Sort/MergeSort.js"
   },
   "devDependencies": {
     "eslint": "^7.21.0",
