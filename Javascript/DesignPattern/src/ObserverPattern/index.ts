@@ -31,5 +31,3 @@ export {
   Subject,
   example,
 };
-
-// https://pravusid.kr/typescript/2020/07/19/typescript-eslint-prettier.html

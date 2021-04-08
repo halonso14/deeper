@@ -13,7 +13,9 @@ const promiseErrorHandling = new Promise((resolve: any, reject: any) => {
       reject(`reject`);
     } else {
       // reject's parameter could be any Object but Error type is recommended.
-      reject(new Error(`Error`));
+      // reject(new Error(`Error`));
+      console.log('Throw Error goes to...');
+      throw new Error('Error Thrown from requset');
     }
     reject(new Error('This reject will be ignored.'));
     return;
