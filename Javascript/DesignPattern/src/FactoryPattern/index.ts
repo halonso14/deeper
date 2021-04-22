@@ -2,6 +2,12 @@ import AbstractFactory from './AbstractFactoryPattern/AbstractFactory';
 import ConcreteFactoryA from './AbstractFactoryPattern/ConcreteFactoryA';
 import ConcreteFactoryB from './AbstractFactoryPattern/ConcreteFactoryB';
 
+console.log('Client only knows interfaces.');
+console.log(
+  'Creating object with given abstract class / interface loosens coupling between classes.'
+);
+console.log('Factory creates classes without knowing the result.');
+
 const clientCode = (factory: AbstractFactory) => {
   const classA = factory.createClassA();
   const classB = factory.createClassB();
