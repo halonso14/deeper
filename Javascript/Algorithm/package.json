@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start-mergeSort": "node ./Sort/MergeSort.js"
+    "start-mergeSort": "node ./Sort/MergeSort.js",
+    "test4": "node ./kakao/2020_blind_4.js"
   },
   "devDependencies": {
     "eslint": "^7.21.0",
