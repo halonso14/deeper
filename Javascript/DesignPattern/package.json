@@ -8,6 +8,7 @@
     "start": "tsc && node build/index.js",
     "start-ts": "ts-node index.ts",
     "start-factory": "ts-node ./src/FactoryPattern/index.ts",
+    "start-proxy": "ts-node ./src/ProxyPattern/index.ts",
     "prettier": "prettier --write --config .prettierrc ./src/**/*.ts"
   },
   "author": "",
