@@ -11,7 +11,7 @@ function merge(left, right) {
   while (right.length) result.push(right.shift());
   return result;
 }
-  
+
 function mergeSort(array) {
   if (array.length < 2) return array;
   const pivot = Math.floor(array.length / 2);
@@ -20,26 +20,35 @@ function mergeSort(array) {
   return merge(mergeSort(left), mergeSort(right));
 }
 
+function reverseArray(array) {
+  const reversedArray = [];
+  for (let i = array.length - 1; i > 0; i--) {
+    reversedArray.push(array[i]);
+  }
+  return reversedArray;
+}
+
 function solution(n, weak, dist) {
-  let answer = dist.length;
+  let answer = 9999;
   let rotateCount = 0;
   const sortedDist = mergeSort(dist);
-  while(true) {
-    if(rotateCount === weak.length) {
-        break;
+  // TODO check reversedWeak
+  const reversedWeak = reverseArray(weak);
+  while (true) {
+    if (rotateCount === weak.length) {
+      break;
     }
     let count = 0;
-
     let index = 0;
 
-    for(let i = sortedDist.length-1; i >= 0; i--) {
+    for (let i = sortedDist.length - 1; i >= 0; i--) {
       let range = sortedDist[i];
       index = weak.findIndex((weakPoint) => range + weak[index] < weakPoint);
       count++;
-      if(index === -1) {
-        if(count < answer) {
+      if (index === -1) {
+        if (count < answer) {
           answer = count;
-          count = 0
+          count = 0;
         }
         break;
       }
@@ -49,12 +58,14 @@ function solution(n, weak, dist) {
     weak.push(fisrtWeak);
     rotateCount++;
   }
-  // TODO validate case for -1
+  if (answer === 9999) {
+    return -1;
+  }
   return answer;
 }
 
-const n = 12;
-const weak = [1, 5, 6, 10];
-const dist = [4, 2, 3, 1];
+const n = 200;
+const weak = [0, 10, 50, 80, 120, 160];
+const dist = [1, 10, 5, 40, 30];
 
 console.log(solution(n, weak, dist));
