@@ -22,33 +22,34 @@ function mergeSort(array) {
 
 function reverseArray(array) {
   const reversedArray = [];
+  const max = array[array.length - 1];
   for (let i = array.length - 1; i > 0; i--) {
-    reversedArray.push(array[i]);
+    reversedArray.push(max - array[i]);
   }
   return reversedArray;
 }
 
-function solution(n, weak, dist) {
+function solve(n, weak, dist) {
+  console.log('dist', dist);
   let answer = 9999;
   let rotateCount = 0;
-  const sortedDist = mergeSort(dist);
-  // TODO check reversedWeak
-  const reversedWeak = reverseArray(weak);
   while (true) {
+    console.log('weak', weak);
     if (rotateCount === weak.length) {
       break;
     }
     let count = 0;
     let index = 0;
 
-    for (let i = sortedDist.length - 1; i >= 0; i--) {
-      let range = sortedDist[i];
+    for (let i = 0; i < dist.length; i++) {
+      let range = dist[i];
       index = weak.findIndex((weakPoint) => range + weak[index] < weakPoint);
       count++;
       if (index === -1) {
         if (count < answer) {
           answer = count;
           count = 0;
+          console.log('current answer', answer);
         }
         break;
       }
@@ -58,6 +59,18 @@ function solution(n, weak, dist) {
     weak.push(fisrtWeak);
     rotateCount++;
   }
+  return answer;
+}
+
+function solution(n, weak, dist) {
+  const sortedDist = mergeSort(dist).reverse();
+  const reversedWeak = reverseArray(weak);
+  console.log('clock-wise');
+  const result1 = solve(n, weak, sortedDist);
+  console.log('');
+  console.log('counter clock-wise');
+  const result2 = solve(n, reversedWeak, sortedDist);
+  const answer = result1 < result2 ? result1 : result2;
   if (answer === 9999) {
     return -1;
   }
