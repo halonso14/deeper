@@ -1,12 +1,12 @@
-import ICommand, { ActionType } from './ICommand';
+import Command, { ActionType } from './Command';
 
 export default class RemoteController {
-  private command: ICommand;
-  constructor(command: ICommand) {
+  private command: Command;
+  constructor(command: Command) {
     this.command = command;
   }
 
-  public setDevice(newCommand: ICommand) {
+  public setDevice(newCommand: Command) {
     this.command = newCommand;
   }
 

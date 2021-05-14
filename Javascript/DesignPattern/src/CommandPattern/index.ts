@@ -1,9 +1,9 @@
 import AudioCommand from './AudioCommand';
 import TVCommand from './TVCommand';
 import RemoteController from './RemoteController';
-import { ActionType } from './ICommand';
+import { ActionType } from './Command';
 
-const sampleScript_1 = () => {
+const runTest = () => {
   const tvCommand = new TVCommand();
   const audioCommand = new AudioCommand();
   const remoteController = new RemoteController(tvCommand);
@@ -24,4 +24,4 @@ const sampleScript_1 = () => {
   console.groupEnd();
 }
 
-sampleScript_1();
+runTest();

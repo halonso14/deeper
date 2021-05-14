@@ -1,19 +1,19 @@
-import ICommand, { ActionType } from './ICommand';
+import Command, { ActionType } from './Command';
 
-export default class TVCommand implements ICommand {
-  private turnOn(): void {
+export default class TVCommand implements Command {
+  turnOn(): void {
     console.log('TV is turned on.');
   }
 
-  private turnOff(): void {
+  turnOff(): void {
     console.log('TV is turned off.');
   }
 
-  private volumeUp(): void {
+  volumeUp(): void {
     console.log('TV volume is increased.');
   }
 
-  private volumeDown(): void {
+  volumeDown(): void {
     console.log('TV volume is decreased.');
   }
 

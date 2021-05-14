@@ -1,19 +1,19 @@
-import ICommand, { ActionType } from './ICommand';
+import Command, { ActionType } from './Command';
 
-export default class AudioCommand implements ICommand {
-  private turnOn(): void {
+export default class AudioCommand implements Command {
+  turnOn(): void {
     console.log('Audio is turned on.');
   }
 
-  private turnOff(): void {
+  turnOff(): void {
     console.log('Audio is turned off.');
   }
 
-  private volumeUp(): void {
+  volumeUp(): void {
     console.log('Audio volume is increased.');
   }
 
-  private volumeDown(): void {
+  volumeDown(): void {
     console.log('Audio volume is decreased.');
   }
 
