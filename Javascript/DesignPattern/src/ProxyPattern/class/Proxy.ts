@@ -1,7 +1,7 @@
-import Subject from '../interface/Subject';
+import ISubject from '../interface/ISubject';
 import RealSubject from './RealSubject';
 
-export default class Proxy implements Subject {
+export default class Proxy implements ISubject {
   private realSubject: RealSubject;
 
   constructor(realSubject: RealSubject) {

@@ -1,6 +1,6 @@
-import Subject from '../interface/Subject';
+import ISubject from '../interface/ISubject';
 
-export default class RealSubject implements Subject {
+export default class RealSubject implements ISubject {
   public request(): void {
     console.log('RealSubject: Handling request.');
   }
