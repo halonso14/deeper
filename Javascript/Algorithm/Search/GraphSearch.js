@@ -25,6 +25,22 @@ export default class GraphSearch extends Graph {
     return result;
   }
 
+  bfsWithProcessor(start, processor) {
+    const queue = [start];
+    const result = [];
+    const visited = {};
+    visited[start] = true;
+    let currentVertex;
+    while (queue.length) {
+      currentVertex = queue.shift();
+      result.push(currentVertex);
+      this.adjacencyList[currentVertex].forEach((adjacentVertex) => {
+        processor(adjacentVertex, visited, queue);
+      });
+    }
+    return result;
+  }
+
   dfsRecursive(start) {
     const result = [];
     const visited = {};
