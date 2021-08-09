@@ -1,7 +1,8 @@
 import Graph from '../DataStructure/Graph';
 
-export class GraphSearch extends Graph {
+export default class GraphSearch extends Graph {
   constructor() {
+    super();
     this.adjacencyList = {};
   }
 
@@ -27,13 +28,19 @@ export class GraphSearch extends Graph {
   dfsRecursive(start) {
     const result = [];
     const visited = {};
-    const adjacencyList = this.adjacencyList;
+    const { adjacencyList } = this;
+    // eslint-disable-next-line consistent-return
     function dfs(vertex) {
-      if (!vertex) return null;
+      if (!vertex) {
+        return null;
+      }
       visited[vertex] = true;
       result.push(vertex);
       adjacencyList[vertex].forEach((adjacentVertex) => {
-        if (!visited[adjacentVertex]) return dfs(adjacentVertex);
+        if (!visited[adjacentVertex]) {
+          return dfs(adjacentVertex);
+        }
+        return null;
       });
     }
 

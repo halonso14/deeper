@@ -1,7 +1,7 @@
 // REFERENCE: https://www.freecodecamp.org/news/8-essential-graph-algorithms-in-javascript/
 // REFERENCE: https://ko.m.wikipedia.org/wiki/%EA%B9%8A%EC%9D%B4_%EC%9A%B0%EC%84%A0_%ED%83%90%EC%83%89
 
-export class Graph {
+export default class Graph {
   constructor() {
     this.adjacencyList = {};
   }
