@@ -1,5 +1,5 @@
 // REFERENCE: https://velog.io/@woobuntu/%EC%B5%9C%EB%8B%A8-%EA%B2%BD%EB%A1%9C-%EC%B0%BE%EA%B8%B0
-export default class PriorityQueue {
+class PriorityQueue {
   constructor(graph) {
     this.values = [];
     this.graph = graph;
@@ -33,7 +33,7 @@ export default class PriorityQueue {
       }
       const neighbors = this.graph[dequeued];
       Object.values(neighbors).forEach((currentNeighbor) => {
-        if (visitedHash.hasOwnProperty(currentNeighbor)) {
+        if (Object.prototype.hasOwnProperty.call(visitedHash, 'name')) {
           return;
         }
         const distanceFromStart = distance[dequeued] + 1;
@@ -44,13 +44,26 @@ export default class PriorityQueue {
         }
         visitedHash[dequeued] = true;
       });
-      let node = end;
-      const route = [];
-      while (node) {
-        route.unshift(node);
-        node = previous[node];
-      }
-      return route;
     }
+    let node = end;
+    const route = [];
+    while (node) {
+      route.unshift(node);
+      node = previous[node];
+    }
+    return route;
   }
 }
+
+const graph = {
+  A: ['B', 'C'],
+  B: ['A', 'D', 'E'],
+  C: ['A', 'F'],
+  D: ['B'],
+  E: ['B', 'F'],
+  F: ['C', 'E'],
+};
+
+const priorityQueue = new PriorityQueue(graph);
+const result = priorityQueue.findShortestWay('A', 'F');
+console.log('result', result);
