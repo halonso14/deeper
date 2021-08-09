@@ -64,6 +64,15 @@ const graph = {
   F: ['C', 'E'],
 };
 
+const weightedGraph = {
+  A: { B: 3, C: 2 },
+  B: { A: 3, D: 4, E: 1 },
+  C: { A: 2, F: 5 },
+  D: { B: 4 },
+  E: { B: 1, F: 2 },
+  F: { C: 5, E: 2 },
+};
+
 const priorityQueue = new PriorityQueue(graph);
 const result = priorityQueue.findShortestWay('A', 'F');
 console.log('result', result);
