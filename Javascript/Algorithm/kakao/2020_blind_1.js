@@ -1,3 +1,4 @@
+/* eslint-disable no-continue */
 function getZippedString(s, length) {
   let result = '';
   let prevString = '';
@@ -6,14 +7,14 @@ function getZippedString(s, length) {
     const currentString = s.substr(i, length);
 
     if (currentString === prevString && i >= s.length - length) {
-      duplicationCount++;
+      duplicationCount += 1;
       if (duplicationCount > 1) {
         result += String(duplicationCount);
       }
       result += prevString;
       continue;
     } else if (currentString === prevString) {
-      duplicationCount++;
+      duplicationCount += 1;
       continue;
     }
 
@@ -30,10 +31,11 @@ function getZippedString(s, length) {
   return result;
 }
 
+// eslint-disable-next-line no-unused-vars
 function solution(s) {
-  var answer = s.length;
-  for (let i = 1; i <= s.length; i++) {
-    let tempResult = getZippedString(s, i);
+  let answer = s.length;
+  for (let i = 1; i <= s.length; i += 1) {
+    const tempResult = getZippedString(s, i);
     if (tempResult.length < answer) {
       answer = tempResult.length;
     }

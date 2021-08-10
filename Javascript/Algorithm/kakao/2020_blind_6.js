@@ -23,7 +23,7 @@ function mergeSort(array) {
 function reverseWeak(array) {
   const reversedArray = [];
   const max = array[array.length - 1];
-  for (let i = array.length - 1; i >= 0; i--) {
+  for (let i = array.length - 1; i >= 0; i -= 1) {
     reversedArray.push(max - array[i]);
   }
   return reversedArray;
@@ -32,6 +32,7 @@ function reverseWeak(array) {
 function solve(n, weak, dist) {
   let answer = 9999;
   let rotateCount = 0;
+  // eslint-disable-next-line no-constant-condition
   while (true) {
     if (rotateCount === weak.length) {
       break;
@@ -39,10 +40,11 @@ function solve(n, weak, dist) {
     let count = 0;
     let index = 0;
 
-    for (let i = 0; i < dist.length; i++) {
-      let range = dist[i];
+    for (let i = 0; i < dist.length; i += 1) {
+      const range = dist[i];
+      // eslint-disable-next-line no-loop-func
       index = weak.findIndex((weakPoint) => range + weak[index] < weakPoint);
-      count++;
+      count += 1;
       if (index === -1) {
         if (count < answer) {
           answer = count;
@@ -52,9 +54,9 @@ function solve(n, weak, dist) {
       }
     }
 
-    let fisrtWeak = weak.shift() + n;
+    const fisrtWeak = weak.shift() + n;
     weak.push(fisrtWeak);
-    rotateCount++;
+    rotateCount += 1;
   }
   return answer;
 }

@@ -4,33 +4,33 @@ function createRule(s) {
   const count = s.match(/[?]/g).length;
   const firstIndex = s.indexOf('?');
   if (firstIndex) {
-    message = s.substr(0, wordLength - count)
+    message = s.substr(0, wordLength - count);
     return {
       message,
       length: message.length,
-      index: 0
+      index: 0,
     };
   }
   message = s.substr(wordLength - 1, wordLength - count);
   return {
     message,
     length: message.length,
-    index: count
+    index: count,
   };
 }
 
 function solution(words, queries) {
-  var answer = [];
-  for (let i = 0; i < queries.length; i++) {
+  const answer = [];
+  for (let i = 0; i < queries.length; i += 1) {
     let count = 0;
     const query = queries[i];
-    for (let j = 0; j < words.length; j++) {
+    for (let j = 0; j < words.length; j += 1) {
       const word = words[j];
       const { message, length, index } = createRule(query);
       if (word.length === query.length) {
         const comparingString = word.substr(index, length);
         if (message === comparingString) {
-          count++;
+          count += 1;
         }
       }
     }
