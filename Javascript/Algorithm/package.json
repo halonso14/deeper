@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start-pq": "node ./DataStructure/PriorityQueue.js",
+    "start-queue": "node ./DataStructure/Queue.js",
     "start-mergeSort": "node ./Sort/MergeSort.js",
     "start-permutation": "node ./Search/Permutation.js",
     "test4": "node ./kakao/2020_blind_4.js",

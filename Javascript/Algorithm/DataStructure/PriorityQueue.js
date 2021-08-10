@@ -1,70 +1,63 @@
-// REFERENCE: https://velog.io/@woobuntu/%EC%B5%9C%EB%8B%A8-%EA%B2%BD%EB%A1%9C-%EC%B0%BE%EA%B8%B0
 class PriorityQueue {
-  constructor(graph) {
-    this.values = [];
-    this.graph = graph;
+  constructor() {
+    this.priorityQueue = [];
   }
 
   enqueue(name, priority) {
-    this.values.push({ name, priority });
-    this.values.sort((a, b) => a.priority - b.priority);
-    return this.values;
+    this.priorityQueue.push({ name, priority });
+    this.priorityQueue.sort((a, b) => a.priority - b.priority);
+    return this.priorityQueue;
   }
 
   dequeue() {
-    return this.values.shift();
-  }
-
-  findShortestWay(start, end) {
-    const distance = {};
-    const visitedHash = {};
-    const previous = {};
-    Object.keys(this.graph).forEach((key) => {
-      distance[key] = key === start ? 0 : Infinity;
-      previous[key] = null;
-    });
-
-    this.enqueue(start, 0);
-
-    while (true) {
-      const dequeued = this.dequeue().name;
-      if (dequeued === end) {
-        break;
-      }
-      const neighbors = this.graph[dequeued];
-      Object.values(neighbors).forEach((currentNeighbor) => {
-        if (Object.prototype.hasOwnProperty.call(visitedHash, 'name')) {
-          return;
-        }
-        const distanceFromStart = distance[dequeued] + 1;
-        if (distanceFromStart < distance[currentNeighbor]) {
-          distance[currentNeighbor] = distanceFromStart;
-          previous[currentNeighbor] = dequeued;
-          this.enqueue(currentNeighbor, distanceFromStart);
-        }
-        visitedHash[dequeued] = true;
-      });
-    }
-    let node = end;
-    const route = [];
-    while (node) {
-      route.unshift(node);
-      node = previous[node];
-    }
-    return route;
+    return this.priorityQueue.shift();
   }
 }
 
-const graph = {
-  A: ['B', 'C'],
-  B: ['A', 'D', 'E'],
-  C: ['A', 'F'],
-  D: ['B'],
-  E: ['B', 'F'],
-  F: ['C', 'E'],
-};
+function findSmallestPriority(graph, startNodeName, endNodeName) {
+  const priorityQueue = new PriorityQueue();
+  const priorityFromStartNode = {};
+  const visitedNode = {};
+  const previousNode = {};
+  Object.keys(graph).forEach((key) => {
+    priorityFromStartNode[key] = key === startNodeName ? 0 : Infinity;
+    previousNode[key] = null;
+  });
 
-const weightedGraph = {
+  priorityQueue.enqueue(startNodeName, 0);
+
+  while (true) {
+    const { name: dequeuedNodeName } = priorityQueue.dequeue();
+    if (dequeuedNodeName === endNodeName) {
+      break;
+    }
+    const neighbors = graph[dequeuedNodeName];
+    Object.entries(neighbors).forEach(([name, priority]) => {
+      if (Object.prototype.hasOwnProperty.call(visitedNode, 'name')) {
+        return;
+      }
+      const currentPriority =
+        priorityFromStartNode[dequeuedNodeName] + priority;
+
+      if (currentPriority < priorityFromStartNode[name]) {
+        priorityFromStartNode[name] = currentPriority;
+        previousNode[name] = dequeuedNodeName;
+        priorityQueue.enqueue(name, currentPriority);
+      }
+      visitedNode[dequeuedNodeName] = true;
+    });
+  }
+
+  let nodeName = endNodeName;
+  const route = [];
+  while (nodeName) {
+    route.unshift(nodeName);
+    nodeName = previousNode[nodeName];
+  }
+  return { route, priority: priorityFromStartNode[endNodeName] };
+}
+
+const graph = {
   A: { B: 3, C: 2 },
   B: { A: 3, D: 4, E: 1 },
   C: { A: 2, F: 5 },
@@ -73,6 +66,5 @@ const weightedGraph = {
   F: { C: 5, E: 2 },
 };
 
-const priorityQueue = new PriorityQueue(graph);
-const result = priorityQueue.findShortestWay('A', 'F');
+const result = findSmallestPriority(graph, 'A', 'F');
 console.log('result', result);
