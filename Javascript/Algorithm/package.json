@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start-array": "node ./Search/ArraySearch.js",
     "start-pq": "node ./DataStructure/PriorityQueue.js",
     "start-mergeSort": "node ./Sort/MergeSort.js",
     "start-permutation": "node ./Search/Permutation.js",
