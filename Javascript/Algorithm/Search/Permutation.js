@@ -34,16 +34,6 @@ function getPermutationsWithResultAndCallback(array, callback, callbackResult) {
   // Do the actual permuation work on array[], starting at index
   // eslint-disable-next-line no-shadow, consistent-return
   function permutate(array, index, callback) {
-    // Swap elements i1 and i2 in array
-    // eslint-disable-next-line no-shadow
-    function swap(array, i1, i2) {
-      const t = array[i1];
-      // eslint-disable-next-line no-param-reassign
-      array[i1] = array[i2];
-      // eslint-disable-next-line no-param-reassign
-      array[i2] = t;
-    }
-
     if (index === array.length - 1) {
       callback(array, callbackResult);
     } else {
