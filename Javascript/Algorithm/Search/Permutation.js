@@ -1,29 +1,30 @@
-//REF https://stackoverflow.com/questions/9960908/permutations-in-javascript/11629015#11629015
-function getPermutationsWithCallback(array, callback) {
-  // Do the actual permuation work on array[], starting at index
-  function permutate(array, index, callback) {
-    // Swap elements i1 and i2 in array a[]
-    function swap(a, i1, i2) {
-      var t = a[i1];
-      a[i1] = a[i2];
-      a[i2] = t;
-    }
+// REFERENCE https://stackoverflow.com/questions/9960908/permutations-in-javascript/11629015#11629015
 
-    if (index == array.length - 1) {
+function swap(array, i1, i2) {
+  const t = array[i1];
+  // eslint-disable-next-line no-param-reassign
+  array[i1] = array[i2];
+  // eslint-disable-next-line no-param-reassign
+  array[i2] = t;
+}
+
+function getPermutationsWithCallback(array, callback) {
+  // eslint-disable-next-line no-shadow
+  function permutate(array, index, callback) {
+    if (index === array.length - 1) {
       callback(array);
       return 1;
-    } else {
-      var count = permutate(array, index + 1, callback);
-      for (var i = index + 1; i < array.length; i++) {
-        swap(array, i, index);
-        count += permutate(array, index + 1, callback);
-        swap(array, i, index);
-      }
-      return count;
     }
+    let count = permutate(array, index + 1, callback);
+    for (let i = index + 1; i < array.length; i += 1) {
+      swap(array, i, index);
+      count += permutate(array, index + 1, callback);
+      swap(array, i, index);
+    }
+    return count;
   }
 
-  if (!array || array.length == 0) {
+  if (!array || array.length === 0) {
     return 0;
   }
   return permutate(array, 0, callback);
@@ -31,19 +32,23 @@ function getPermutationsWithCallback(array, callback) {
 
 function getPermutationsWithResultAndCallback(array, callback, callbackResult) {
   // Do the actual permuation work on array[], starting at index
+  // eslint-disable-next-line no-shadow, consistent-return
   function permutate(array, index, callback) {
-    // Swap elements i1 and i2 in array a[]
-    function swap(a, i1, i2) {
-      var t = a[i1];
-      a[i1] = a[i2];
-      a[i2] = t;
+    // Swap elements i1 and i2 in array
+    // eslint-disable-next-line no-shadow
+    function swap(array, i1, i2) {
+      const t = array[i1];
+      // eslint-disable-next-line no-param-reassign
+      array[i1] = array[i2];
+      // eslint-disable-next-line no-param-reassign
+      array[i2] = t;
     }
 
-    if (index == array.length - 1) {
+    if (index === array.length - 1) {
       callback(array, callbackResult);
     } else {
       permutate(array, index + 1, callback);
-      for (var i = index + 1; i < array.length; i++) {
+      for (let i = index + 1; i < array.length; i += 1) {
         swap(array, i, index);
         permutate(array, index + 1, callback);
         swap(array, i, index);
@@ -52,7 +57,7 @@ function getPermutationsWithResultAndCallback(array, callback, callbackResult) {
     }
   }
 
-  if (!array || array.length == 0) {
+  if (!array || array.length === 0) {
     return 0;
   }
   return permutate(array, 0, callback);
@@ -61,22 +66,18 @@ function getPermutationsWithResultAndCallback(array, callback, callbackResult) {
 function getPermutations(array) {
   const result = [];
 
+  // eslint-disable-next-line no-shadow
   function addPermutationToResult(array) {
     result.push(array.slice());
   }
 
-  function swap(array, firstIndex, secondIndex) {
-    var tempValue = array[firstIndex];
-    array[firstIndex] = array[secondIndex];
-    array[secondIndex] = tempValue;
-  }
-
+  // eslint-disable-next-line no-shadow, consistent-return
   function permutate(array, index) {
-    if (index == array.length - 1) {
+    if (index === array.length - 1) {
       addPermutationToResult(array);
     } else {
       permutate(array, index + 1);
-      for (var i = index + 1; i < array.length; i++) {
+      for (let i = index + 1; i < array.length; i += 1) {
         swap(array, i, index);
         permutate(array, index + 1);
         swap(array, i, index);
@@ -85,21 +86,21 @@ function getPermutations(array) {
     }
   }
 
-  if (!array || array.length == 0) {
+  if (!array || array.length === 0) {
     return [];
   }
 
   return permutate(array, 0);
 }
 
-const result = [];
-function callback(array) {
-  result.push(array.slice(0));
+const testResult = [];
+function simpleCallback(array) {
+  testResult.push(array.slice(0));
 }
-getPermutationsWithCallback([1, 2, 3], callback);
+getPermutationsWithCallback([1, 2, 3], simpleCallback);
 
 console.group('run getPermutationsWithCallback');
-console.log(result);
+console.log(testResult);
 console.log();
 console.groupEnd();
 
