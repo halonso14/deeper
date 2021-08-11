@@ -37,12 +37,7 @@ function arrayBFS(array, start, end) {
       const tmpX = curX + direction[0];
       const tmpY = curY + direction[1];
 
-      if (
-        tmpX + direction[0] < 0 ||
-        tmpX >= MAX_ROW ||
-        tmpY < 0 ||
-        tmpY >= MAX_COLUMN
-      ) {
+      if (tmpX < 0 || tmpX >= MAX_ROW || tmpY < 0 || tmpY >= MAX_COLUMN) {
         return;
       }
 
