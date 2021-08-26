@@ -61,7 +61,7 @@ function solve(n, weak, dist) {
   return answer;
 }
 
-function solution(n, weak, dist) {
+export default function solution(n, weak, dist) {
   const sortedDist = mergeSort(dist).reverse();
   const reversedWeak = reverseWeak(weak);
   const result1 = solve(n, weak, sortedDist);

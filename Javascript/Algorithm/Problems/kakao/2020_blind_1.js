@@ -32,7 +32,7 @@ function getZippedString(s, length) {
 }
 
 // eslint-disable-next-line no-unused-vars
-function solution(s) {
+export default function solution(s) {
   let answer = s.length;
   for (let i = 1; i <= s.length; i += 1) {
     const tempResult = getZippedString(s, i);

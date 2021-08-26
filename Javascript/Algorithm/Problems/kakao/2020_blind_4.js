@@ -19,7 +19,7 @@ function createRule(s) {
   };
 }
 
-function solution(words, queries) {
+export default function solution(words, queries) {
   const answer = [];
   for (let i = 0; i < queries.length; i += 1) {
     let count = 0;
@@ -39,8 +39,3 @@ function solution(words, queries) {
 
   return answer;
 }
-
-const words = ['frodo', 'front', 'frost', 'frozen', 'frame', 'kakao'];
-const queries = ['fro??', '????o', 'fr???', 'fro???', 'pro?', '?????'];
-
-console.log(solution(words, queries));
