@@ -5,6 +5,7 @@ export default function solution(n, stations, w) {
   function checkEmptySpotLength() {
     let prevEnd = 0;
     for (let i = 0; i < stations.length; i += 1) {
+      // eslint-disable-next-line no-bitwise
       const share = ((stations[i] - w - 1 - prevEnd) / width) >> 0;
       answer += share;
       const remainder = (stations[i] - w - 1 - prevEnd) % width;
