@@ -1,0 +1,9 @@
+{
+	"name": "Grammer",
+	"version": "1.0.0",
+	"main": "index.js",
+	"scripts": {
+		"start-closer": "node src/ExecutionContext/closer.js"
+	},
+	"license": "MIT"
+}
