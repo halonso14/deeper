@@ -3,7 +3,8 @@
 	"version": "1.0.0",
 	"main": "index.js",
 	"scripts": {
-		"start-closer": "node src/ExecutionContext/closer.js"
+		"start-closer": "node src/ExecutionContext/closer.js",
+		"start-free": "node src/ExecutionContext/freeVariable.js"
 	},
 	"license": "MIT"
 }
