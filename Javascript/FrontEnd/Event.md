@@ -41,7 +41,9 @@ event handler는 3가지 방법으로 할당 할 수 있다.
 - 객체를 event handler로 사용할 수 있다. 이 경우 객체에 반드시 handleEvent(event) 메서드가 있어야 한다.
 - removeEventListener를 같은 단계에 있어야 event handler가 제거된다.
 
-### Event Delegation
+---
+
+## Event Delegation
 
 ```
 <div class="itemList">
@@ -72,6 +74,37 @@ document.querySelector('.itemList').addEventListener('click', eventHandler);
 ```
 
 이벤트 위임 방식을 사용하면 명시적으로 event listener를 등록하지 않아도 된다.
+
+예시)
+
+```
+parent.onclick = function(event) {
+  let elem = event.target.closest('elem');
+
+  if (!elem) return;
+
+  if (!parent.contains(elem)) return;
+
+  // handle event
+};
+```
+
+### flow
+
+1. 컨테이너에 하나의 핸들러를 할당한다.
+1. 핸들러의 event.target을 사용해 이벤트가 발생한 요소를 파악한다.
+1. 원하는 요소에서 이벤트가 발생한 경우, 이벤트를 핸들링한다.
+
+### pros
+
+1.  초기화가 단순하고 메모리가 절약된다.
+1.  요소가 추가/제거 되어도 추가적인 절차가 필요하지 않다.
+1.  DOM 수정이 용이다.
+
+### cons
+
+1.  Event bubbling이 필수다.
+1.  하위 컨테이너에서 발생하는 이벤트에도 응답을 해야한다.
 
 ---
 
