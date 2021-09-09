@@ -14,25 +14,14 @@
 ### Command Interface
  - interface for command.
 ```
-abstract class Command {
+interface Command {
   abstract execute(): void;
 }
-
-class ConcreteCommand extends {
-  doSomething(): void {
-    console.log('do something');
-  }
-
-  execute(): void {
-    this.doSomething();
-  };
-}
 ```
-
  - interface for command with parameter is actually a strategy pattern.
  - referene https://stackoverflow.com/questions/4834979/difference-between-strategy-pattern-and-command-pattern
 ```
-abstract class Command {
+interface Command {
   abstract doA(): void;
   abstract doB(): void;
   abstract doC(): void;
@@ -42,6 +31,17 @@ abstract class Command {
 ```
 ### Command
  - concrete command.
+ ```
+ class ConcreteCommand extends {
+  doSomething(): void {
+    console.log('do something');
+  }
+
+  execute(): void {
+    this.doSomething();
+  };
+}
+ ```
 
 ---
 
