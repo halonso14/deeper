@@ -1,3 +1,3 @@
-export default abstract class Command {
-  abstract execute(): void;
+export default interface Command {
+  execute(): void;
 }

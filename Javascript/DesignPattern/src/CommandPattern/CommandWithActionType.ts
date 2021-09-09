@@ -1,13 +1,13 @@
 import { ActionType } from './types';
 
-export default abstract class CommandWithActionType {
-  abstract turnOn(): void;
+export default interface CommandWithActionType {
+  turnOn(): void;
 
-  abstract turnOff(): void;
+  turnOff(): void;
 
-  abstract volumeUp(): void;
+  volumeUp(): void;
 
-  abstract volumeDown(): void;
+  volumeDown(): void;
 
-  abstract execute(actionType: ActionType): void;
+  execute(actionType: ActionType): void;
 }
