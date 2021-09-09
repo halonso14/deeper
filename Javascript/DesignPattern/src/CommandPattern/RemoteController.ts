@@ -1,4 +1,4 @@
-import Command, { ActionType } from './Command';
+import Command from './Command';
 
 export default class RemoteController {
   private command: Command;
@@ -10,7 +10,7 @@ export default class RemoteController {
     this.command = newCommand;
   }
 
-  public pressButton(actionType: ActionType) {
-    this.command.execute(actionType);
+  public pressButton() {
+    this.command.execute();
   }
 }

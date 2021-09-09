@@ -1,38 +1,54 @@
-import Command, { ActionType } from './Command';
+/* eslint-disable no-console */
+/* eslint-disable max-classes-per-file */
+import Command from './Command';
 
-export default class TVCommand implements Command {
+class TVTurnOnCommand implements Command {
+  // eslint-disable-next-line class-methods-use-this
   turnOn(): void {
     console.log('TV is turned on.');
   }
 
+  public execute(): void {
+    this.turnOn();
+  }
+}
+
+class TVTurnOffCommand implements Command {
+  // eslint-disable-next-line class-methods-use-this
   turnOff(): void {
     console.log('TV is turned off.');
   }
 
-  volumeUp(): void {
+  public execute(): void {
+    this.turnOff();
+  }
+}
+
+class TVVolumeUpCommand implements Command {
+  // eslint-disable-next-line class-methods-use-this
+  volumeUP(): void {
     console.log('TV volume is increased.');
   }
 
+  public execute(): void {
+    this.volumeUP();
+  }
+}
+
+class TVVolumeDownCommand implements Command {
+  // eslint-disable-next-line class-methods-use-this
   volumeDown(): void {
     console.log('TV volume is decreased.');
   }
 
-  public execute(actionType: ActionType) {
-    switch(actionType) {
-      case ActionType.TURN_ON:
-        this.turnOn();
-        break;
-      case ActionType.TURN_OFF:
-        this.turnOff();
-        break;
-      case ActionType.VOLUME_UP:
-        this.volumeUp();
-        break;
-      case ActionType.VOLUME_DOWN:
-        this.volumeDown();
-        break;
-      default:
-        break;
-    }
+  public execute(): void {
+    this.volumeDown();
   }
 }
+
+export {
+  TVTurnOnCommand,
+  TVTurnOffCommand,
+  TVVolumeUpCommand,
+  TVVolumeDownCommand,
+};

@@ -1,38 +1,54 @@
-import Command, { ActionType } from './Command';
+/* eslint-disable no-console */
+// eslint-disable-next-line max-classes-per-file
+import Command from './Command';
 
-export default class AudioCommand implements Command {
+class AudioTurnOnCommand implements Command {
+  // eslint-disable-next-line class-methods-use-this
   turnOn(): void {
     console.log('Audio is turned on.');
   }
 
+  public execute(): void {
+    this.turnOn();
+  }
+}
+
+class AudioTurnOffCommand implements Command {
+  // eslint-disable-next-line class-methods-use-this
   turnOff(): void {
     console.log('Audio is turned off.');
   }
 
+  public execute(): void {
+    this.turnOff();
+  }
+}
+
+class AudioVolumeUpCommand implements Command {
+  // eslint-disable-next-line class-methods-use-this
   volumeUp(): void {
     console.log('Audio volume is increased.');
   }
 
+  public execute(): void {
+    this.volumeUp();
+  }
+}
+
+class AudioVolumeDownCommand implements Command {
+  // eslint-disable-next-line class-methods-use-this
   volumeDown(): void {
     console.log('Audio volume is decreased.');
   }
 
-  public execute(actionType: ActionType) {
-    switch(actionType) {
-      case ActionType.TURN_ON:
-        this.turnOn();
-        break;
-      case ActionType.TURN_OFF:
-        this.turnOff();
-        break;
-      case ActionType.VOLUME_UP:
-        this.volumeUp();
-        break;
-      case ActionType.VOLUME_DOWN:
-        this.volumeDown();
-        break;
-      default:
-        break;
-    }
+  public execute(): void {
+    this.volumeDown();
   }
 }
+
+export {
+  AudioTurnOnCommand,
+  AudioTurnOffCommand,
+  AudioVolumeUpCommand,
+  AudioVolumeDownCommand,
+};
