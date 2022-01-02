@@ -1,8 +1,8 @@
 import Proxy from './class/Proxy';
 import RealSubject from './class/RealSubject';
-import Subject from './interface/Subject';
+import ISubject from './interface/ISubject';
 
-function clientCode(subject: Subject) {
+function clientCode(subject: ISubject) {
   subject.request();
 }
 
